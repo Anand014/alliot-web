@@ -1,0 +1,15 @@
+# LifeKit — Web repo (React + Vite + TypeScript + Tailwind)
+
+This is the **web** repo. Product context and API contract: see parent `../LIFEKIT_FEATURES.md` and `../LIFEKIT_CURSOR_RULES.md`.
+
+## This repo only
+
+- **Types:** `src/types/` — TypeScript interfaces aligned with backend/OpenAPI. No `any`.
+- **API:** `src/api/client.ts` (base) + one file per module (e.g. `money.ts`). Never inline fetch in components.
+- **Data:** Custom hooks in `src/hooks/` (e.g. `useMoneyEntries`) using React Query; hooks call API layer.
+- **UI:** `src/components/ui/` primitives, `src/components/layout/`, `src/components/[module]/`. Use `cn()` from `@/utils/cn` for Tailwind. Theme tokens from tailwind.config.ts — no raw hex.
+- **Forms:** react-hook-form + zod; schema in separate file, typed with `z.infer<typeof schema>`.
+- **State:** Zustand in `src/stores/` (auth, theme, user plan).
+- **Routes:** Page components in `src/pages/`; thin, composed of components.
+
+Adding a module: types in `src/types/[module].ts` → API in `src/api/[module].ts` → hook → components → page. Add freemium gate for Pro features.
